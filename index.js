@@ -45,7 +45,7 @@ let handlers = {};
 
 handlers.hello = function(data,callback){
     //Callback a http status code, and a payload Object
-    callback(200, {msg : "Hello I'm the Homework 1!"});
+    callback(200, {msg : "Hello, I'm the Homework 1!"});
 };
 handlers.notFound = function(data,callback){
     callback(404);
