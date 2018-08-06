@@ -16,11 +16,9 @@ let server = http.createServer(function(req,res){
         buffer += decoder.write(data);
     });
     req.on('end',function(){
-        console.log(path);
         buffer += decoder.end();
         //Choose handler
         let handler = typeof (router[path]) !== 'undefined' ? router[path] : handlers.notFound;
-        console.log(handler);
         let data = {
             path    : path,
             method  : req.method.toLowerCase(),
@@ -31,6 +29,7 @@ let server = http.createServer(function(req,res){
         handler(data,function(statusCode,payload){
             statusCode = typeof(statusCode) == 'number' ? statusCode : 200;
             payload = typeof(payload) == 'object' ? payload : {};
+            res.setHeader("Content-Type", "application/json");
             res.writeHead(statusCode);
             res.end(JSON.stringify(payload));
         });
